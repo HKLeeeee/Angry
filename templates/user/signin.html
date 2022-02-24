@@ -1,0 +1,21 @@
+{% extends 'base_without_search.html' %}
+{% load bootstrap4 %}
+
+{% block html_head %}
+    <!--head tag에 들어갈 내용 -->
+    <title>MOVI 회원가입</title>
+{% endblock %}
+
+{% block html_body_without_search %}
+    <!-- body tag에 들어갈 내용 -->
+    <div class="container">
+    <br>
+    <h1>회원가입</h1>
+        <br>
+    <form>
+        {% csrf_token %}
+        {% bootstrap_form signin_form %}
+    </form>
+    </div>
+
+{% endblock %}
