@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% load bootstrap4 %}
+
+{% block html_head %}
+    <script src="/static/js/menu_btn.js"></script>
+{% endblock %}
+
+{% block html_body %}
+    <div class="container">
+
+        <div class="row mt-5">
+            <div class="col-12">
+                <div class="form-group">
+                    <h1>상세 보기</h1>
+                    글 번호 : <span id="post_id">{{ detail_form.initial.id }}</span><br>
+                    <label for="title">제목</label>
+                    <input type="text" class="form-control" id="title" value="{{ post.b_title }}" readonly>
+                    <label for="contents">내용</label>
+                    <textarea class="form-control" readonly>{{ post.b_content }}</textarea>
+
+                </div>
+                <button class="btn btn-primary" onclick="document.location.href='/commu/list/'">리스트로</button>
+                <button class="btn btn-success" onclick="board_modify()">수정하기</button>
+            </div>
+        </div>
+
+    </div>
+{% endblock %}
