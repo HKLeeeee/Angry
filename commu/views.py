@@ -1,18 +1,15 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from commu.models import Board, Comment
-from commu.forms import BoardForm,BoardDetailForm
+from commu.models import Board, Comment, Media
+from commu.forms import BoardForm, BoardDetailForm
 
 
+def b_list(request, media_id):
 
-def b_list(request):
-    # if request.user.is_authenticated:
-        posts = Board.objects.all().order_by('-id')
-        context = {
-            "posts": posts
-        }
-        return render(request, 'commu/list.html', context)
-    # else:
-    #     return redirect('home')
+    posts = Board.objects.all().order_by('-id')
+    context = {
+        "posts": posts
+    }
+    return render(request, 'commu/list.html', context)
 
 
 def b_create(request):
@@ -37,29 +34,29 @@ def b_create(request):
         return render(request, 'commu/create.html', context)
 
 
-def b_detail(request,board_id):
-    post =get_object_or_404(Board,pk=board_id)
+def b_detail(request, board_id):
+    post = get_object_or_404(Board, pk=board_id)
     board_detail_form = BoardDetailForm(instance=post)
     comments = post.comment_set.all().order_by('-id')
-    context={
-        "detail_form":board_detail_form,
-        'comments':comments,
-        'post':post
+    context = {
+        "detail_form": board_detail_form,
+        'comments': comments,
+        'post': post
     }
-    return render(request,'commu/detail.html',context)
+    return render(request, 'commu/detail.html', context)
 
 
-def b_modify(request,pk):
-    board =Board.objects.get(id=pk)
-    if request.method=='POST':
+def b_modify(request, pk):
+    board = Board.objects.get(id=pk)
+    if request.method == 'POST':
         board.b_title = request.POST['b_title']
         board.b_content = request.POST['b_content']
         board.b_author = request.user
         board.save()
         return redirect('commu:b_list')
     else:
-        boardForm =BoardForm
-        context={
-            'boardForm':boardForm
+        boardForm = BoardForm
+        context = {
+            'boardForm': boardForm
         }
-        return render(request,'commu/modify.html',context)
+        return render(request, 'commu/modify.html', context)
