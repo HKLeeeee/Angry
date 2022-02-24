@@ -92,11 +92,11 @@
                     </li>
                     {% if request.user.is_authenticated %}
                     <li>
-                        <button type="button" class="btn btn-outline-light m-2">Logout</button>
+                        <a href="/user/logout/"><button type="button" class="btn btn-outline-light m-2">Logout</button></a>
                     </li>
                     {% else %}
                     <li>
-                        <button type="button" class="btn btn-outline-light m-2">Login</button>
+                        <a href="/user/login/"><button type="button" class="btn btn-outline-light m-2">Login</button></a>
                     </li>
                     {% endif %}
                 </ul>
