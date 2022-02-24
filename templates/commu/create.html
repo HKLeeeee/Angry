@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% load bootstrap4 %}
+<script src="/static/js/menu_btn.js"></script>
+{% block html_header %}
+{% endblock %}
+{% block html_body %}
+    <div class="container">
+        <h1>새글 작성</h1>
+
+        <form action="/commu/create/" method="post">
+            {% csrf_token %}
+            {% bootstrap_form boardForm %}
+            <br>
+            <button type="submit" class="btn btn-primary">작성</button>
+        </form>
+    </div>
+
+{% endblock %}

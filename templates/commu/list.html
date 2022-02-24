@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% block html_header %}
+    <script src="/static/js/menu_btn.js"></script>
+
+{% endblock %}
+{% block html_body %}
+
+
+    <div style="float: left;"
+             id="movie_poster"></div>
+    <div class="container" id="titleoverview">
+    </div>
+    <br><br>
+    <button type="button" class="btn btn-primary"
+            onclick="new_board()">새글 작성
+    </button>
+    <table class="table table-hover">
+        <thead class="thread-dark">
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">글 제목</th>
+            <th scope="col">글 작성자</th>
+            <th scope="col">글 작성일</th>
+            <th scope="col">좋아요 개수</th>
+
+        </tr>
+        </thead>
+        <tbody>
+        {% for list in posts %}
+            <tr>
+                <td>{{ list.id }} </td>
+                <td>{{ list.b_title }}</td>
+                <td>{{ list.b_author }}</td>
+                <td>{{ list.b_date }}</td>
+                <td>{{ list.b_like }}</td>
+            </tr>
+        {% endfor %}
+
+        </tbody>
+    </table>
+
+
+
+    </div>
+{% endblock %}
