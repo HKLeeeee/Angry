@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% load bootstrap4 %}
+{% block html_head %}
+    <script src="/static/js/menu_btn.js"></script>
+{% endblock %}
+
+{% block html_body %}
+     <div class="container">
+        <form method="post">
+                {% csrf_token %}
+                    {% bootstrap_form boardForm %}
+
+                <button type="submit" onclick="document.location.href='/commu/{{ board.pk }}/modify/'">수정</button>
+                <button class="btn btn-primary" onclick="document.location.href='/commu/list/'">리스트로</button>
+        </form>
+
+    </div>
+{% endblock %}

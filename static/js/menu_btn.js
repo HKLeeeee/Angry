@@ -1,7 +1,14 @@
 function new_board(){
     document.location.href='/commu/create/'
 }
-
+function board_modify(){
+    let queryString =$("#post_id").text()
+    document.location.href='/commu/'+queryString+'/modify/'
+}
+// function board_update(){
+//     let queryString=$("#post_id").text()
+//     document.location.href='/commu/'+queryString+'/update/'
+// }
     let my_search ='관상'
     $.ajax({
         async:true,
@@ -28,18 +35,8 @@ function new_board(){
             tr.append(contentTd)
             $('#titleoverview').append(hh)
             $('#titleoverview').append(tr)
-            console.log(result)
-            console.log(result['results'][0]['poster_path'])
-
-            alert('성공')
-
-
         },
         error:function (){
             alert('오류')
         }
     })
-function my_func(){
-
-
-}

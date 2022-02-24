@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
-{% block html_header %}
+{% block html_head %}
+    <title>무슨 타이틀</title>
     <script src="/static/js/menu_btn.js"></script>
 
 {% endblock %}
@@ -11,9 +12,11 @@
     <div class="container" id="titleoverview">
     </div>
     <br><br>
+    <div class="container">
     <button type="button" class="btn btn-primary"
             onclick="new_board()">새글 작성
     </button>
+
     <table class="table table-hover">
         <thead class="thread-dark">
         <tr>
@@ -29,7 +32,7 @@
         {% for list in posts %}
             <tr>
                 <td>{{ list.id }} </td>
-                <td>{{ list.b_title }}</td>
+                <td><a href="/commu/{{ list.id }}/detail/">{{ list.b_title }}</a></td>
                 <td>{{ list.b_author }}</td>
                 <td>{{ list.b_date }}</td>
                 <td>{{ list.b_like }}</td>
