@@ -59,8 +59,7 @@ def b_detail(request, board_id,media_id):
     return render(request, 'commu/detail.html', context)
 
 
-
-def b_modify(request, board_id,media_id):
+def b_modify(request, board_id, media_id):
     board = get_object_or_404(Board, pk=board_id)
     if request.method == 'POST':
         board.b_title = request.POST['b_title']
@@ -68,7 +67,7 @@ def b_modify(request, board_id,media_id):
 
         board.b_author = request.user
         board.save()
-        return redirect('commu:b_list')
+        return redirect('commu:b_list', media_id)
     else:
         boardForm = BoardForm(instance=board)
         context = {
@@ -77,8 +76,9 @@ def b_modify(request, board_id,media_id):
         }
         return render(request, 'commu/modify.html', context)
 
-def b_delete(request,board_id):
-    board =get_object_or_404(Board,pk=board_id)
+
+def b_delete(request, board_id):
+    board = get_object_or_404(Board, pk=board_id)
     board.delete()
     return redirect('commu:b_list')
 

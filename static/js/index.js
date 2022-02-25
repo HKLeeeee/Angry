@@ -31,7 +31,7 @@ $(function() {
                 top5_movie.push(
                     result['results'][i]['id']
                 )
-                //console.log(i +"번째 영황 id:"+top5_movie[i])
+
                 top5_movie_en_poster_path.push(
                     result['results'][i]["poster_path"]
                 )
