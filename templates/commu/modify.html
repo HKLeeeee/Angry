@@ -7,12 +7,13 @@
 {% block html_body %}
      <div class="container">
         <form method="post">
-                {% csrf_token %}
-                    {% bootstrap_form boardForm %}
-
-                <button type="submit" onclick="document.location.href='/commu/{{ board.pk }}/modify/'">수정</button>
-                <button class="btn btn-primary" onclick="document.location.href='/commu/list/'">리스트로</button>
+            {% csrf_token %}
+            {% bootstrap_form boardForm %}
+            <button type="submit" onclick="document.location.href='/commu/{{ board.media.id }}/{{ board.id }}/modify/'">수정</button>
+            <a href="/commu/{{ board.media.id }}/{{ board.id }}/modify"><button>수정1</button></a>
         </form>
+           <button class="btn btn-primary" onclick="document.location.href='/commu/{{ board.media.id }}/list/'">리스트</button>
 
     </div>
+
 {% endblock %}

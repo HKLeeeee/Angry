@@ -2,45 +2,45 @@
 {% block html_head %}
     <title>무슨 타이틀</title>
     <script src="/static/js/menu_btn.js"></script>
-
 {% endblock %}
+
 {% block html_body %}
 
     <div style="float: left;"
-             id="movie_poster"></div>
+         id="movie_poster"></div>
     <div class="container" id="titleoverview">
     </div>
     <br><br>
-    <div class="container">
-    <button type="button" class="btn btn-primary"
-            onclick="new_board()">새글 작성
-    </button>
+    <div id="container" class="container">
+        <button type="button" class="btn btn-primary"
+                onclick="location.href='/commu/'+ {{ board.media.id }} +'/create'">새글 작성
+        </button>
+        <a href="/commu/{{ media.id }}/create/">새글</a>
 
-    <table class="table table-hover">
-        <thead class="thread-dark">
-        <tr>
-            <th scope="col">#</th>
-            <th scope="col">글 제목</th>
-            <th scope="col">글 작성자</th>
-            <th scope="col">글 작성일</th>
-            <th scope="col">좋아요 개수</th>
-
-        </tr>
-        </thead>
-        <tbody>
-        {% for list in posts %}
+        <table class="table table-hover">
+            <thead class="thread-dark">
             <tr>
-                <td>{{ list.id }} </td>
-                <td><a href="/commu/{{ list.id }}/detail/">{{ list.b_title }}</a></td>
-                <td>{{ list.b_author }}</td>
-                <td>{{ list.b_date }}</td>
-                <td>{{ list.b_like }}</td>
+                <th scope="col">#</th>
+                <th scope="col">글 제목</th>
+                <th scope="col">글 작성자</th>
+                <th scope="col">글 작성일</th>
+                <th scope="col">좋아요 개수</th>
+
             </tr>
-        {% endfor %}
+            </thead>
+            <tbody>
+            {% for list in posts %}
+                <tr>
+                    <td>{{ list.id }} </td>
+                    <td><a href="/commu/{{ list.media.id }}/{{ list.id }}/detail/">{{ list.b_title }}</a></td>
+                    <td>{{ list.b_author }}</td>
+                    <td>{{ list.b_date }}</td>
+                    <td>{{ list.b_like }}</td>
+                </tr>
+            {% endfor %}
 
-        </tbody>
-    </table>
-
+            </tbody>
+        </table>
 
 
     </div>
