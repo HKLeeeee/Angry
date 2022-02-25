@@ -17,15 +17,14 @@ def b_list(request, media_id):
     posts = media.board_set.all().order_by('-id')
 
     context = {
-
         "posts": posts,
-
+        "media_id": media_id
     }
 
     return render(request, 'commu/list.html', context)
 
 
-def b_create(request):
+def b_create(request, media_id):
     if request.method == 'POST':
         title = request.POST['b_title']
         content = request.POST['b_content']
@@ -33,16 +32,17 @@ def b_create(request):
         board = Board(
             b_title=title,
             b_content=content,
-            b_author=user
+            b_author=user,
+            media_id=media_id
         )
         board.save()
-        return redirect('commu:b_list')
+        return redirect('commu:b_list', media_id)
     else:
         boardForm = BoardForm()
         board = Board.objects.all()
         context = {
             'boardForm': boardForm,
-
+            'media_id': media_id
         }
         return render(request, 'commu/create.html', context)
 
@@ -60,6 +60,7 @@ def b_detail(request, board_id,media_id):
 
 
 def b_modify(request, board_id, media_id):
+
     board = get_object_or_404(Board, pk=board_id)
     if request.method == 'POST':
         board.b_title = request.POST['b_title']
@@ -77,8 +78,8 @@ def b_modify(request, board_id, media_id):
         return render(request, 'commu/modify.html', context)
 
 
-def b_delete(request, board_id):
-    board = get_object_or_404(Board, pk=board_id)
+def b_delete(request,board_id):
+    board =get_object_or_404(Board,pk=board_id)
     board.delete()
     return redirect('commu:b_list')
 

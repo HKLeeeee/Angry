@@ -13,9 +13,8 @@
     <br><br>
     <div id="container" class="container">
         <button type="button" class="btn btn-primary"
-                onclick="location.href='/commu/'+ {{ board.media.id }} +'/create'">새글 작성
+                onclick="new_board({{ media_id }})">새글 작성
         </button>
-        <a href="/commu/{{ media.id }}/create/">새글</a>
 
         <table class="table table-hover">
             <thead class="thread-dark">
