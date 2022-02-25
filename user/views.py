@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from user.models import Member
-from user.forms import SigninForm, LoginForm
-from django.contrib.auth import authenticate, login as django_login, logout as django_logout, authenticate
+from user.forms import SignupForm, LoginForm
+from django.contrib.auth import login as django_login, logout as django_logout, authenticate
 from django.http import HttpResponse
 
 
@@ -15,16 +15,22 @@ def u_login(request):
     return render(request, 'user/login.html', context)
 
 
-def u_signin(request):
-    signin_form = SigninForm()
+def u_signup(request):
+    signup_form = SignupForm()
     context = {
-        "signin_form": signin_form
+        "signup_form": signup_form
     }
-    return render(request, 'user/signin.html', context)
+    return render(request, 'user/signup.html', context)
 
 
-def signin_success(request):
-    return redirect('home')
+def signup_success(request):
+    if request.method == "POST":
+        signup_form = SignupForm(request.POST)
+        if signup_form.is_valid():
+            signup_form.save()
+            return redirect('user:u_login')
+        else:
+            return render(request, 'user/signup.html', {"signup_form": signup_form})
 
 
 def login_process(request):

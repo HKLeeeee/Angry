@@ -48,28 +48,34 @@
 {% endblock %}
 
 {% block html_body_without_search %}
-    <form action="/user/loginProcess/" method="post">
-        {% csrf_token %}
+    <div class="container">
+        <form action="/user/loginProcess/" method="post">
+            {% csrf_token %}
+
+            <br>
+            <h1 class="h3 mb-3 fw-normal">로그인</h1>
+
+            {% bootstrap_form login_form %}
+
+            <br><br>
+            <button class="w-25 btn btn-primary" type="submit">로그인</button>
+        </form>
 
         <br>
-        <h1 class="h3 mb-3 fw-normal">로그인</h1>
-
-        {% bootstrap_form login_form %}
-
-        <br><br>
-        <button class="w-25 btn btn-primary" type="submit">로그인</button>
-        <button class="w-25 btn btn-secondary" type="submit">회원가입</button>
-    </form>
+        <a href="/user/signup/">
+            <button class="w-25 btn btn-secondary">회원가입</button>
+        </a>
+    </div>
 
 
     {#카카오 로그인 버튼#}
-{#    <a id="custom-login-btn" href="javascript:kakaoLogin()">#}
-{#        <img#}
-{#                src="//k.kakaocdn.net/14/dn/btroDszwNrM/I6efHub1SN5KCJqLm1Ovx1/o.jpg"#}
-{#                width="222"#}
-{#                alt="카카오 로그인 버튼"#}
-{#        />#}
-{#    </a>#}
-{##}
-{#    <a href="javascript:kakaoLogout();">카카오 로그아웃</a>#}
+    {#    <a id="custom-login-btn" href="javascript:kakaoLogin()">#}
+    {#        <img#}
+    {#                src="//k.kakaocdn.net/14/dn/btroDszwNrM/I6efHub1SN5KCJqLm1Ovx1/o.jpg"#}
+    {#                width="222"#}
+    {#                alt="카카오 로그인 버튼"#}
+    {#        />#}
+    {#    </a>#}
+    {##}
+    {#    <a href="javascript:kakaoLogout();">카카오 로그아웃</a>#}
 {% endblock %}

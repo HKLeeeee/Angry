@@ -9,13 +9,16 @@
 {% block html_body_without_search %}
     <!-- body tag에 들어갈 내용 -->
     <div class="container">
-    <br>
-    <h1>회원가입</h1>
         <br>
-    <form>
-        {% csrf_token %}
-        {% bootstrap_form signin_form %}
-    </form>
+        <h1>회원가입</h1>
+        <br>
+        <form method="post" class="post-form" action="/user/signupSuccess/">
+            {% csrf_token %}
+            {% bootstrap_form signup_form %}
+            <br><br>
+            <button class="w-25 btn btn-primary" type="submit">회원가입</button>
+        </form>
     </div>
+
 
 {% endblock %}
