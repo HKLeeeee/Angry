@@ -1,14 +1,10 @@
- function new_board(media_id){
-     //let queryString = $("#container ").text()
-     document.location.href ='/commu/'+media_id+'/create/'
- }
-
 function board_modify() {
     let queryString = $("#post_id").text()
-    let media_id= $("#media_id").text()
-    document.location.href = '/commu/'+ media_id+'/' + queryString +'/modify/'
+    let media_id = $("#media_id").text()
+    document.location.href = '/commu/' + media_id + '/' + queryString + '/modify/'
 }
-function like_post(id){
+
+function like_post(id) {
 
 }
 
@@ -16,58 +12,27 @@ function board_delete() {
     let result = confirm('정말 삭제할까요?')
     if (result) {
         let queryString = $('#post_id').text()
-        let media_id= $("#media_id").text()
-        document.location.href = '/commu/' + media_id+'/'+ queryString + '/delete/'
+        let media_id = $("#media_id").text()
+        document.location.href = '/commu/' + media_id + '/' + queryString + '/delete/'
     }
 }
 
-let my_search ='기생충'
-$.ajax({
-    async: true,
-    url: "https://api.themoviedb.org/3/search/movie?api_key=be76d11dead7090637c1dd4cc5e4aa4c&language=ko-KR&page=1&include_adult=false",
-    data: {
-        query: my_search
-    },
-    success: function (result) {
-        $('#movie_poster').empty()
-        let posterTr = $('<tr></tr>')
-        let posterTd = $('<td></td>')
-        let poster = $('<img/>')
-        posterTd.append(poster)
-        let imgurl = "https://www.themoviedb.org/t/p/original" + result['results'][0]['poster_path']
-        poster.attr('src', imgurl)
-        $(poster).css('height', 350)
-        $(poster).css('width', 300)
-        posterTr.append(posterTd)
-        $('#movie_poster').append(posterTr)
-        $('#titleoverview').empty()
-        let hh = $('<h2></h2>').text(result['results'][0]['title'])
-        let tr = $('<tr></tr>')
-        let contentTd = $('<td></td>').text(result['results'][0]['overview'])
-        tr.append(contentTd)
-        $('#titleoverview').append(hh)
-        $('#titleoverview').append(tr)
 
-    },
-    error: function () {
-        alert('오류')
-    }
-})
-function  creat_comment(){
+function creat_comment() {
     $.ajax({
         async: true,
-        url:"",
-        type:'GET',
-        data:{
-            board_id:$('#11').text(),
-            comment_content:$('#11').val()
+        url: "",
+        type: 'GET',
+        data: {
+            board_id: $('#11').text(),
+            comment_content: $('#11').val()
         },
-        dataType:'json',
-        timeout:3000,
-        success:function(result){
+        dataType: 'json',
+        timeout: 3000,
+        success: function (result) {
             alert('성공')
         },
-        error:function (){
+        error: function () {
             alert("어디서 오류 ")
         }
 
