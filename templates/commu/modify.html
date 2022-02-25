@@ -9,10 +9,10 @@
         <form method="post">
             {% csrf_token %}
             {% bootstrap_form boardForm %}
-            <button type="submit" onclick="document.location.href='/commu/{{ board.media.id }}/{{ board.id }}/modify/'">수정</button>
-            <a href="/commu/{{ board.media.id }}/{{ board.id }}/modify"><button>수정1</button></a>
+            <button onclick="document.location.href='/commu/{{ board.media.id }}/{{ board.id }}/modify/'"
+                    class="btn btn-success" type="submit" >수정</button>
         </form>
-           <button class="btn btn-primary" onclick="document.location.href='/commu/{{ board.media.id }}/list/'">리스트</button>
+           <button class="btn btn-primary" onclick="document.location.href='/commu/{{ board.media.id }}/list/'">리스트로</button>
 
     </div>
 

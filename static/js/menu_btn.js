@@ -1,8 +1,7 @@
-// function new_board(){
-//     let queryString = $("#container ").text()
-//     let media_id= $("#container ").text()
-//     document.location.href ='/commu/'+media_id+'/'+queryString+'/create/'
-// }
+ function new_board(media_id){
+     //let queryString = $("#container ").text()
+     document.location.href ='/commu/'+media_id+'/create/'
+ }
 
 function board_modify() {
     let queryString = $("#post_id").text()

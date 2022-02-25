@@ -7,7 +7,7 @@
     <div class="container">
         <h1>새글 작성</h1>
 
-        <form action="/commu/create/" method="post">
+        <form method="post">
             {% csrf_token %}
             {% bootstrap_form boardForm %}
             <br>
