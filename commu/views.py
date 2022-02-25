@@ -4,11 +4,22 @@ from commu.forms import BoardForm, BoardDetailForm
 
 
 def b_list(request, media_id):
+    if not Media.objects.filter(pk=media_id).exists():
+        # media_id가  meda tabel에 없을때
+        # 새로운 레코드 생성
+        media_title = request.GET['title']
+        print(media_title)
+        new_media = Media(id=media_id, title=media_title)
+        new_media.save()
 
-    posts = Board.objects.all().order_by('-id')
+    media = Media.objects.get(id=media_id)
+    # media_id가 일치하는 post들을 다 가져옴
+    posts = media.board_set.all().order_by('-id')
+
     context = {
         "posts": posts
     }
+
     return render(request, 'commu/list.html', context)
 
 
