@@ -31,7 +31,7 @@ $(function() {
                 top5_movie.push(
                     result['results'][i]['id']
                 )
-                console.log(i +"번째 영황 id:"+top5_movie[i])
+
                 top5_movie_en_poster_path.push(
                     result['results'][i]["poster_path"]
                 )
@@ -62,9 +62,6 @@ $(function() {
                     }
 
                     let queryString = "?title="+top5_movie_title[i]
-                    $('#mov_'+i).on('click', function (){
-                        alert("commu/"+top5_movie[i]+"/list"+queryString)
-                    })
                     $('#mov_'+i).parent().attr("href", "commu/"+top5_movie[i]+"/list"+queryString)
                 },
                 error : function (){
@@ -131,9 +128,6 @@ $(function() {
                         $('#tv_'+i).attr("src", img_url+top5_tv_en_poster_path[i])
                     }
                     let queryString = "?title="+top5_tv_title[i]
-                    $('#tv_'+i).on('click', function (){
-                        alert("commu/"+top5_tv[i]+"/list"+queryString)
-                    })
                     $('#tv_'+i).parent().attr("href", "commu/"+top5_tv[i]+"/list"+queryString)
                 },
                 error : function (){
