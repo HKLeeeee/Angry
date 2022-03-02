@@ -10,10 +10,11 @@ class SignupForm(UserCreationForm):
 
     class Meta:
         model = Member
-        fields = ['username', 'email', 'nickname', 'last_name', 'first_name']
+        fields = ['username', 'email', 'mobile', 'nickname', 'last_name', 'first_name']
         labels = {
             'username': '아이디',
             'email': '이메일',
+            'mobile': '전화번호',
             'nickname': '닉네임',
             'last_name': '이름',
             'first_name': ''
@@ -23,6 +24,12 @@ class SignupForm(UserCreationForm):
                 attrs={
                     'class': 'form-control w-50',
                     'placeholder': '이메일을 입력하세요'
+                }
+            ),
+            'mobile': forms.TextInput(
+                attrs={
+                    'class': 'form-control w-50',
+                    'placeholder': '전화번호를 입력하세요'
                 }
             ),
             'username': forms.TextInput(

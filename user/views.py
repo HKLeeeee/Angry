@@ -45,9 +45,13 @@ def login_process(request):
             django_login(request, user)
             return redirect('home')
         else:
-            return HttpResponse('로그인 실패')
+            return render(request, 'user/login.html', {"login_form": LoginForm})
 
 
 def u_logout(request):
     django_logout(request)
     return redirect('home')
+
+
+def u_setting(request):
+    pass
