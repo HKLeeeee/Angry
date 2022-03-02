@@ -15,7 +15,7 @@ class Board(models.Model):
     b_content = models.CharField(max_length=200)
     b_author = models.ForeignKey(Member, on_delete=models.CASCADE)
     # b_like = models.IntegerField(default=0)
-    b_like = models.ManyToManyField(Member,related_name='likes',blank=True)
+    b_like = models.ManyToManyField(Member,related_name='likes', blank=True)
     b_date = models.DateTimeField(auto_now=True)
     media = models.ForeignKey(Media, on_delete=models.CASCADE)
 

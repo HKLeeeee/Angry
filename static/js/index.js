@@ -61,7 +61,7 @@ $(function() {
                         $('#mov_'+i).attr("src", img_url+top5_movie_en_poster_path[i])
                     }
 
-                    let queryString = "?title="+top5_movie_title[i]
+                    let queryString = "?title="+top5_movie_title[i]+"&category=movie"
                     $('#mov_'+i).parent().attr("href", "commu/"+top5_movie[i]+"/list"+queryString)
                 },
                 error : function (){
@@ -127,7 +127,7 @@ $(function() {
                         // console.error(i +"번째 작품의 한글 포스터가 없음.")
                         $('#tv_'+i).attr("src", img_url+top5_tv_en_poster_path[i])
                     }
-                    let queryString = "?title="+top5_tv_title[i]
+                    let queryString = "?title="+top5_tv_title[i]+"&category=tv"
                     $('#tv_'+i).parent().attr("href", "commu/"+top5_tv[i]+"/list"+queryString)
                 },
                 error : function (){

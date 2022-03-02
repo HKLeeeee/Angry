@@ -8,11 +8,11 @@ from django.http import HttpResponse
 
 
 def b_list(request, media_id):
+    media_title = request.GET['title']
+    category = request.GET['category']
     if not Media.objects.filter(pk=media_id).exists():
         # media_id가  meda tabel에 없을때
         # 새로운 레코드 생성
-        media_title = request.GET['title']
-        print(media_title)
         new_media = Media(id=media_id, title=media_title)
         new_media.save()
 
@@ -22,7 +22,9 @@ def b_list(request, media_id):
 
     context = {
         "posts": posts,
-        "media_id": media_id
+        "media_id": media_id,
+        "media_title": media_title,
+        "category": category
     }
 
     return render(request, 'commu/list.html', context)

@@ -1,20 +1,76 @@
 {% extends 'base.html' %}
 {% block html_head %}
-    <title>무슨 타이틀</title>
-    <script src="/static/js/menu_btn.js"></script>
+    <title>{{ media_title }}</title>
+    <script src="/static/js/list.js"></script>
+
+    <style>
+        .poster-div {
+            width: 30%;
+            aspect-ratio: 2 / 3;
+        }
+
+        @media screen and (min-width: 1440px) {
+            .poster {
+                width: 315.5px;
+                height: 473.25px;
+            }
+        }
+        @media screen and (min-width: 1024px) and (max-width: 1439px) {
+            .poster{
+                width: 250px;
+                height: 375px;
+            }
+        }
+        @media screen and (max-width: 1023px) {
+            .poster{
+                width: 200px;
+                height: 300px;
+            }
+        }
+
+        .overview-div {
+            width: 90%;
+        }
+
+        .overview-box {
+            width: 100%;
+            word-break: normal;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: normal;
+        }
+
+    </style>
 {% endblock %}
 
 {% block html_body %}
+    <div id="media_info" class="container">
+        <div class="d-flex align-items-start align-items-center my-3 border">
+            <!-- poster -->
+            <div class="m-0 align-items-center poster-div">
+                <img class="align-self-center poster" id="poster_img"
+                     src="/static/img/No-Image-Available.jpg" alt="포스터 이미지">
+            </div>
+            <!-- info -->
+            <div class="d-flex flex-column flex-fill align-items-start justify-content-start my-1 mx-3 overview-div">
+                <div class="my-3 fs-4 font-weight-bold" id="media_title">스파이더맨 : 파프롬홈</div>
+                <div class="my-1" id="date">개봉일 : 2019-06-28</div>
+                <div class="my-1" id="rating">평점 : 7.1</div>
+                <div class="my-2" id="OTT_button"><input type="button" class="btn btn-danger" value="Netfilx에서 보기"/></div>
+                <div class="mt-3 overview-box" id="overview">어벤져스 멤버들과 타노스와의 대접전을 마친 뒤, 지난 5년 동안 사라졌던 사람들이 동시에 돌아왔다.
+                    아이언맨이 떠난 채 한동안 지구를 구할 히어로가 공석인 상황을 수습할 히어로는 현재 스파이더맨 피터 파커뿐이다. 친구들과의 유럽 현장학습 도중 닉 퓨리의 부름을 받게 된
+                    피터는 미스테리오라는 정체 모를 히어로와 힘을 합쳐 엘리멘탈이라는 괴생명체를 무찔러야 하는 상황에 처한다. 그런데 피터는 지구를 구하는 일보다 MJ에게 멋지게 고백할 계획이
+                    우선인데...
+                </div>
+            </div>
 
-    <div style="float: left;"
-         id="movie_poster"></div>
-    <div class="container" id="titleoverview">
+        </div>
+
     </div>
-    <br><br>
-    <div id="container" class="container">
 
-        <button type="button" class="btn btn-primary"
-                onclick="new_board({{ media_id }})">새글 작성
+    <div id="post_container" class="container my-3">
+        <button type="button" class="btn btn-primary my-3"
+                onclick='new_board({{ media_id }})'>새글 작성
         </button>
 
         <table class="table table-hover">
