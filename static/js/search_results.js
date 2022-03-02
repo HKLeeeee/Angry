@@ -137,5 +137,5 @@ $(function () {
 })
 
 function go_to_commu_board(title, id, category){
-    document.location.href = '/commu/'+id+'/list/?title='+title+"&category="+category
+    document.location.href = '/commu/'+id+'-'+category+'/list?title='+title
 }
