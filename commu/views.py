@@ -1,6 +1,10 @@
+import json
+
 from django.shortcuts import render, redirect, get_object_or_404
 from commu.models import Board, Comment, Media
 from commu.forms import BoardForm, BoardDetailForm
+from django.http import JsonResponse
+from django.http import HttpResponse
 
 
 def b_list(request, media_id):
@@ -47,7 +51,7 @@ def b_create(request, media_id):
         return render(request, 'commu/create.html', context)
 
 
-def b_detail(request, board_id,media_id):
+def b_detail(request, board_id, media_id):
     post = get_object_or_404(Board, pk=board_id)
     board_detail_form = BoardDetailForm(instance=post)
     comments = post.comment_set.all().order_by('-id')
@@ -60,7 +64,6 @@ def b_detail(request, board_id,media_id):
 
 
 def b_modify(request, board_id, media_id):
-
     board = get_object_or_404(Board, pk=board_id)
     if request.method == 'POST':
         board.b_title = request.POST['b_title']
@@ -73,17 +76,49 @@ def b_modify(request, board_id, media_id):
         boardForm = BoardForm(instance=board)
         context = {
             'boardForm': boardForm,
-            'board':board
+            'board': board
         }
         return render(request, 'commu/modify.html', context)
 
 
-def b_delete(request,board_id):
-    board =get_object_or_404(Board,pk=board_id)
+def b_delete(request, board_id, media_id):
+    board = get_object_or_404(Board, pk=board_id)
     board.delete()
-    return redirect('commu:b_list')
+    return redirect('commu:b_list', media_id)
 
 
+def create_comment(request):
+    comment = Comment()
+    comment.c_author = request.user
+    comment.c_content = request.GET['comment_content']
+    comment.c_board_id = request.GET['c_board_id']
 
+    comment.save()
 
+    return JsonResponse({
+        'c_id': comment.id,
+        'c_content': comment.c_content,
+    }, json_dumps_params={'ensure_ascii': True})
 
+def b_like(request):
+    if request.is_ajax():
+        post_id = request.GET['post_id']
+        post = get_object_or_404(Board, pk=post_id)
+
+        if not request.user.is_authenticated:
+            message = "로그인을 해주세요"  # 화면에 띄울 메세지
+            context = {"b_like_count": post.b_like.count(), 'message': message}
+            return HttpResponse(json.dumps(context), content_type='application/json')
+
+        user =request.user #로그인 한 유저
+        if post.b_like.filter(id=user.id).exists(): #이미 좋아요를 누른 유저일떄
+            post.b_like.remove(user)
+            message="좋아요 취소" #화면에 띄울 메세지
+        else: #좋아요를 누르지 않은 유저의 경우
+            post.b_like.add(user)
+            message="좋아요"
+
+        context={
+            'like_count':post.b_like.count(),'message':message
+        }
+        return HttpResponse(json.dumps(context),content_type='application/json')
