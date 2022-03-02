@@ -49,7 +49,7 @@ $(function () {
                         list_container.removeClass("border-dark border-3")
                     })
                     list_container.on('click', function (){
-                        go_to_commu_board(title, media_id)
+                        go_to_commu_board(title, media_id, "movie")
                     })
                     let poster_div = $('<div></div>').addClass("m-0 align-items-center poster-div")
                     let poster_img = $('<img />').addClass("align-self-center poster")
@@ -107,7 +107,7 @@ $(function () {
                         list_container.removeClass("border-dark border-3")
                     })
                     list_container.on('click', function (){
-                        go_to_commu_board(title, media_id)
+                        go_to_commu_board(title, media_id, "tv")
                     })
                     let poster_div = $('<div></div>').addClass("m-0 align-items-center poster-div")
                     let poster_img = $('<img />').addClass("align-self-center poster")
@@ -136,6 +136,6 @@ $(function () {
     }
 })
 
-function go_to_commu_board(title, id){
-    document.location.href = '/commu/'+id+'/list/?title='+title
+function go_to_commu_board(title, id, category){
+    document.location.href = '/commu/'+id+'/list/?title='+title+"&category="+category
 }
