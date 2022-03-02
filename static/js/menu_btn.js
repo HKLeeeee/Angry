@@ -4,9 +4,7 @@ function board_modify() {
     document.location.href = '/commu/' + media_id + '/' + queryString + '/modify/'
 }
 
-function like_post(id) {
 
-}
 
 function board_delete() {
     let result = confirm('정말 삭제할까요?')

@@ -3,6 +3,7 @@
 
 {% block html_head %}
     <script src="/static/js/menu_btn.js"></script>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css">
 {% endblock %}
 
 {% block html_body %}
@@ -23,51 +24,84 @@
 
                 </div>
                 <button class="btn btn-primary"
-                        onclick="location.href='/commu/{{ post.media.id }}/list'">리스트</button>
+                        onclick="location.href='/commu/{{ post.media.id }}/list'">리스트
+                </button>
 
-                {% if request.user == post.b_author  %}
+                {% if request.user == post.b_author %}
                     <button class="btn btn-success" onclick="board_modify()">수정하기</button>
                     <button class="btn btn-danger" onclick="board_delete()">삭제</button>
                 {% endif %}
-             <button class="btn btn-warning"
-                onclick="like_post(this.id)">{{ post.b_like }}좋아요
-        </button>
-            <span id ="like_count">{{ board.b_like.count }}</span>
-            <div class ='toast' style="display: none">
-            </div>
-            <div id ='message'></div>
+                {# 좋아요 버튼#}
+                <button id="{{ post.id }}" class="btn btn-warning"  onclick ="post_like(this.id)">
+                    {% if request.user in post.b_like.all %}
+                        <i id="heart" class="fas fa-heart"></i>
+                    {%else%}
+                          <i id="heart" class="far fa-heart"></i>
+                    {%  endif %}
+                    <span id="like_count">{{ post.b_like.count }}</span>
+                </button>
+
+
+                {#    좋아요버튼 끝 #}
+
             </div>
         </div>
 
     </div>
     <br><br>
-{#    댓글 시작 #}
+    {#    댓글 시작 #}
     <div class="comment_container">
         <h2>Comment</h2>
-    <label for="c_name">Nick name</label>
-    <input type="text" class="form-control w-25" id="c_name">
-    <label for="c_content">Content</label>
-    <input type="text" class="form-control w-50" id="c_content">
-    <br>
-    <button type="button" class="btn btn-info" onclick="creat_comment()">Comment submit</button>
-    <table class="table table-hover">
-         <thead class="thread-dark">
+        <label for="c_name">Nick name</label>
+        <input type="text" class="form-control w-25" id="c_name">
+        <label for="c_content">Content</label>
+        <input type="text" class="form-control w-50" id="c_content">
+        <br>
+        <button type="button" class="btn btn-info" onclick="creat_comment()">Comment submit</button>
+        <table class="table table-hover">
+            <thead class="thread-dark">
             <tr>
                 <th scope="col">Comment_author</th>
                 <th scope="col">Comment_content</th>
                 <th scope="col">Delete</th>
             </tr>
             </thead>
-        <tbody>
+            <tbody>
             {% for comment in comments %}
                 <tr>
                     <td>{{ comment.c_author }}</td>
                     <td>{{ comment.c_content }}</td>
-                    <td><button type="button" class="btn btn-danger">Delete</button></td>
+                    <td>
+                        <button type="button" class="btn btn-danger">Delete</button>
+                    </td>
                 </tr>
             {% endfor %}
-        </tbody>
-    </table>
+            </tbody>
+        </table>
 
     </div>
+    <script type="text/javascript">
+    function post_like(id) {
+    console.log('hi')  // 확인
+    $.ajax({
+        url:"{% url 'commu:b_like' %}",
+        data:{
+            'post_id':id
+        },
+        dataType: "json",
+        success: function (response){
+            console.log('성공확인')
+            $('#like_count').html(response.b_like_count)
+            $('#message').html(response.message)
+            $('.toast').fadeIn(400).delay(100).fadeOut(400)
+            if (response.message == "좋아요"){
+                 $('#heart').attr("class", "fas fa-heart")
+            }else if(response.message == "좋아요 취소"){
+                $('#heart').attr("class", "far fa-heart")
+            }
+        }
+    })
+}
+    </script>
 {% endblock %}
+

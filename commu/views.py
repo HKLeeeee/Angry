@@ -102,25 +102,30 @@ def create_comment(request):
         'c_content': comment.c_content,
     }, json_dumps_params={'ensure_ascii': True})
 
+
 def b_like(request):
     if request.is_ajax():
         post_id = request.GET['post_id']
-        post = get_object_or_404(Board, pk=post_id)
+        post = Board.objects.get(id=post_id)
 
         if not request.user.is_authenticated:
             message = "로그인을 해주세요"  # 화면에 띄울 메세지
-            context = {"b_like_count": post.b_like.count(), 'message': message}
+            context = {
+                "b_like_count": post.b_like.count(),
+                'message': message
+            }
             return HttpResponse(json.dumps(context), content_type='application/json')
 
-        user =request.user #로그인 한 유저
-        if post.b_like.filter(id=user.id).exists(): #이미 좋아요를 누른 유저일떄
+        user = request.user  # 로그인 한 유저
+        if post.b_like.filter(id=user.id).exists():  # 이미 좋아요를 누른 유저일떄
             post.b_like.remove(user)
-            message="좋아요 취소" #화면에 띄울 메세지
-        else: #좋아요를 누르지 않은 유저의 경우
+            message = "좋아요 취소"  # 화면에 띄울 메세지
+        else:  # 좋아요를 누르지 않은 유저의 경우
             post.b_like.add(user)
-            message="좋아요"
+            message = "좋아요"
 
-        context={
-            'like_count':post.b_like.count(),'message':message
+        context = {
+            'b_like_count': post.b_like.count(),
+            'message': message
         }
-        return HttpResponse(json.dumps(context),content_type='application/json')
+        return HttpResponse(json.dumps(context), content_type='application/json')
