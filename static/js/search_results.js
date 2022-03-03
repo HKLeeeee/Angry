@@ -31,6 +31,10 @@ $(function () {
             success : function (result){
                 $('#result_container').empty()
                 let search_result = result['results']
+                if(search_result.length == 0){
+                    let empty_result_message = $('<h2></h2>').text('검색 결과가 없습니다. 검색어를 다시 입력하세요.')
+                    $('#result_container').append(empty_result_message)
+                }
                 for(let i = 0; i<search_result.length; i++){
                     let title = search_result[i]['title']
                     let media_id = search_result[i]['id']
@@ -89,6 +93,10 @@ $(function () {
             success : function (result){
                 $('#result_container').empty()
                 let search_result = result['results']
+                if(search_result.length == 0){
+                    let empty_result_message = $('<h2></h2>').text('검색 결과가 없습니다. 검색어를 다시 입력하세요.')
+                    $('#result_container').append(empty_result_message)
+                }
                 for(let i = 0; i<search_result.length; i++){
                     let title = search_result[i]['name']
                     let media_id = search_result[i]['id']
