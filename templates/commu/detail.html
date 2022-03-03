@@ -32,12 +32,12 @@
                     <button class="btn btn-danger" onclick="board_delete()">삭제</button>
                 {% endif %}
                 {# 좋아요 버튼#}
-                <button id="{{ post.id }}" class="btn btn-warning"  onclick ="post_like(this.id)">
+                <button id="{{ post.id }}" class="btn btn-warning" onclick="post_like(this.id)">
                     {% if request.user in post.b_like.all %}
                         <i id="heart" class="fas fa-heart"></i>
-                    {%else%}
-                          <i id="heart" class="far fa-heart"></i>
-                    {%  endif %}
+                    {% else %}
+                        <i id="heart" class="far fa-heart"></i>
+                    {% endif %}
                     <span id="like_count">{{ post.b_like.count }}</span>
                 </button>
 
@@ -53,11 +53,13 @@
     <div class="comment_container">
         <h2>Comment</h2>
         <label for="c_name">Nick name</label>
-        <input type="text" class="form-control w-25" id="c_name">
+        <br>
+        <input id="now_login_id" type="text" readonly="readonly" value="{{ request.user }}">
+        <br>
         <label for="c_content">Content</label>
         <input type="text" class="form-control w-50" id="c_content">
         <br>
-        <button type="button" class="btn btn-info" onclick="creat_comment()">Comment submit</button>
+        <button type="button" class="btn btn-info" onclick="make_comment()">Comment submit</button>
         <table class="table table-hover">
             <thead class="thread-dark">
             <tr>
@@ -72,7 +74,7 @@
                     <td>{{ comment.c_author }}</td>
                     <td>{{ comment.c_content }}</td>
                     <td>
-                        <button type="button" class="btn btn-danger">Delete</button>
+                        <button type="button" class="btn btn-warning">Delete</button>
                     </td>
                 </tr>
             {% endfor %}
@@ -81,27 +83,29 @@
 
     </div>
     <script type="text/javascript">
-    function post_like(id) {
-    console.log('hi')  // 확인
-    $.ajax({
-        url:"{% url 'commu:b_like' %}",
-        data:{
-            'post_id':id
-        },
-        dataType: "json",
-        success: function (response){
-            console.log('성공확인')
-            $('#like_count').html(response.b_like_count)
-            $('#message').html(response.message)
-            $('.toast').fadeIn(400).delay(100).fadeOut(400)
-            if (response.message == "좋아요"){
-                 $('#heart').attr("class", "fas fa-heart")
-            }else if(response.message == "좋아요 취소"){
-                $('#heart').attr("class", "far fa-heart")
-            }
+        function post_like(id) {
+            console.log('hi')  // 확인
+            $.ajax({
+                url: "{% url 'commu:b_like' %}",
+                data: {
+                    'post_id': id
+                },
+                dataType: "json",
+                success: function (response) {
+                    console.log('성공확인')
+                    $('#like_count').html(response.b_like_count)
+                    $('#message').html(response.message)
+                    $('.toast').fadeIn(400).delay(100).fadeOut(400)
+                    if (response.message == "좋아요") {
+                        $('#heart').attr("class", "fas fa-heart")
+                    } else if (response.message == "좋아요 취소") {
+                        $('#heart').attr("class", "far fa-heart")
+                    }
+                }
+            })
         }
-    })
-}
+
+
     </script>
 {% endblock %}
 
