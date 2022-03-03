@@ -1,6 +1,6 @@
 import json
 
-from django.shortcuts import render, redirect, get_object_or_404, reverse
+from django.shortcuts import render, redirect, get_object_or_404
 from commu.models import Board, Comment, Media
 from commu.forms import BoardForm, BoardDetailForm
 from django.http import JsonResponse
@@ -99,10 +99,9 @@ def create_comment(request, media_id, category, board_id):
     comment.c_board_id = request.GET['c_board_id']
 
     comment.save()
-
     return JsonResponse({
         'c_id': comment.c_board_id,
-        'c_author': comment.c_author,
+        'c_author': str(request.user),
         'c_content': comment.c_content
     }, json_dumps_params={'ensure_ascii': True})
 
@@ -135,7 +134,10 @@ def b_like(request):
         return HttpResponse(json.dumps(context), content_type='application/json')
 
 
-def comment_Delete(request):
-    comment = get_object_or_404(Comment, pk=request.GET['comment_id'])
+def comment_delete(request):
+    c_id = request.GET['comment_id']
+    comment = get_object_or_404(Comment, pk=c_id)
     comment.delete()
-    return JsonResponse({}, json_dumps_params={'ensure_ascii': True})
+    return JsonResponse({
+        'c_id': c_id
+    }, json_dumps_params={'ensure_ascii': True})

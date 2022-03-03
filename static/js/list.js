@@ -18,7 +18,19 @@ function new_board() {
 
 }
 
+function go_to_detail(media_id, category, list_id){
+     if($('#now_login_id').text() == "AnonymousUser"){
+        alert('로그인이 필요한 서비스 입니다.')
+        document.location.href='/user/login/'
+    }else{
+         document.location.href='/commu/'+media_id+'-'+category+'/'+list_id+'/detail/'
+    }
 
+}
+
+function hello(){
+    alert('hello?')
+}
 $(function () {
     let TMDB_key = "be76d11dead7090637c1dd4cc5e4aa4c"
     let img_url = "https://image.tmdb.org/t/p/original"
