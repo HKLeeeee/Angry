@@ -62,7 +62,16 @@ $(function() {
                     }
 
                     let queryString = "?title="+top5_movie_title[i]
-                    $('#mov_'+i).parent().attr("href", "commu/"+top5_movie[i]+"-movie/list"+queryString)
+                    $('#mov_'+i).on("click", function (){
+                        document.location.href = "commu/"+top5_movie[i]+"-movie/list"+queryString
+                    })
+                    $('#mov_'+i).on("mouseenter", function (){
+                        $('#mov_'+i).addClass("focused")
+                    })
+                    $('#mov_'+i).on("mouseleave", function (){
+                        $('#mov_'+i).removeClass("focused")
+                    })
+
                 },
                 error : function (){
                     load_failed()
@@ -128,7 +137,15 @@ $(function() {
                         $('#tv_'+i).attr("src", img_url+top5_tv_en_poster_path[i])
                     }
                     let queryString = "?title="+top5_tv_title[i]
-                    $('#tv_'+i).parent().attr("href", "commu/"+top5_tv[i]+"-tv/list"+queryString)
+                    $('#tv_'+i).parent().on("click", function (){
+                        document.location.href = "commu/"+top5_tv[i]+"-tv/list"+queryString
+                    })
+                    $('#tv_'+i).on("mouseenter", function (){
+                        $('#tv_'+i).addClass("focused")
+                    })
+                    $('#tv_'+i).on("mouseleave", function (){
+                        $('#tv_'+i).removeClass("focused")
+                    })
                 },
                 error : function (){
                     load_failed()

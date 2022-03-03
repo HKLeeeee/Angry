@@ -31,6 +31,10 @@ $(function () {
             success : function (result){
                 $('#result_container').empty()
                 let search_result = result['results']
+                if(search_result.length == 0){
+                    let empty_result_message = $('<h2></h2>').text('검색 결과가 없습니다. 검색어를 다시 입력하세요.')
+                    $('#result_container').append(empty_result_message)
+                }
                 for(let i = 0; i<search_result.length; i++){
                     let title = search_result[i]['title']
                     let media_id = search_result[i]['id']
@@ -41,7 +45,7 @@ $(function () {
                     }
                     let overview = search_result[i]["overview"]
 
-                    let list_container = $('<div></div>').addClass("d-flex align-items-start align-items-center my-1 px-1 border border-secondary rounded")
+                    let list_container = $('<div></div>').addClass("d-flex align-items-start align-items-center my-1 px-1 border border-secondary rounded list-div")
                     list_container.on('mouseenter', e => {
                         list_container.addClass("border-dark border-3")
                     })
@@ -89,6 +93,10 @@ $(function () {
             success : function (result){
                 $('#result_container').empty()
                 let search_result = result['results']
+                if(search_result.length == 0){
+                    let empty_result_message = $('<h2></h2>').text('검색 결과가 없습니다. 검색어를 다시 입력하세요.')
+                    $('#result_container').append(empty_result_message)
+                }
                 for(let i = 0; i<search_result.length; i++){
                     let title = search_result[i]['name']
                     let media_id = search_result[i]['id']
@@ -99,7 +107,7 @@ $(function () {
                     }
                     let overview = search_result[i]["overview"]
 
-                    let list_container = $('<div></div>').addClass("d-flex align-items-start align-items-center my-1 px-1 border border-secondary rounded")
+                    let list_container = $('<div></div>').addClass("d-flex align-items-start align-items-center my-1 px-1 border border-secondary rounded list-div")
                     list_container.on('mouseenter', e => {
                         list_container.addClass("border-dark border-3")
                     })
