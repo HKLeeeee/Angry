@@ -137,7 +137,7 @@ $(function() {
                         $('#tv_'+i).attr("src", img_url+top5_tv_en_poster_path[i])
                     }
                     let queryString = "?title="+top5_tv_title[i]
-                    $('#tv_'+i).parent().on("click", function (){
+                    $('#tv_'+i).on("click", function (){
                         document.location.href = "commu/"+top5_tv[i]+"-tv/list"+queryString
                     })
                     $('#tv_'+i).on("mouseenter", function (){
