@@ -60,7 +60,9 @@ def b_detail(request, board_id, media_id, category):
         "detail_form": board_detail_form,
         'comments': comments,
         'post': post,
-        'category': category
+        'category': category,
+        'media_id': media_id
+
     }
     return render(request, 'commu/detail.html', context)
 
@@ -90,7 +92,7 @@ def b_delete(request, board_id, media_id, category):
     return redirect('commu:b_list', media_id, category)
 
 
-def create_comment(request):
+def create_comment(request, media_id, category, board_id):
     comment = Comment()
     comment.c_author = request.user
     comment.c_content = request.GET['comment_content']
@@ -99,8 +101,9 @@ def create_comment(request):
     comment.save()
 
     return JsonResponse({
-        'c_id': comment.id,
-        'c_content': comment.c_content,
+        'c_id': comment.c_board_id,
+        'c_author': comment.c_author,
+        'c_content': comment.c_content
     }, json_dumps_params={'ensure_ascii': True})
 
 
@@ -130,3 +133,9 @@ def b_like(request):
             'message': message
         }
         return HttpResponse(json.dumps(context), content_type='application/json')
+
+
+def comment_Delete(request):
+    comment = get_object_or_404(Comment, pk=request.GET['comment_id'])
+    comment.delete()
+    return JsonResponse({}, json_dumps_params={'ensure_ascii': True})

@@ -8,7 +8,14 @@
 function new_board() {
     let this_url = location.href.split('/')
     let media_info = this_url[4]
-    document.location.href = '/commu/' + media_info + '/create/'
+    if($('#now_login_id').text() == "AnonymousUser"){
+        alert('로그인이 필요한 서비스 입니다.')
+        document.location.href='/user/login/'
+    }else{
+
+        document.location.href = '/commu/' + media_info + '/create/'
+    }
+
 }
 
 

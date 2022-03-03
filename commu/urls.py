@@ -10,6 +10,8 @@ urlpatterns = [
     path('<int:media_id>-<slug:category>/<int:board_id>/detail/', views.b_detail, name='b_detail'),
     path('<int:media_id>-<slug:category>/<int:board_id>/modify/', views.b_modify, name="b_modify"),
     path('<int:media_id>-<slug:category>/<int:board_id>/delete/', views.b_delete, name='b_delete'),
+    path('<int:media_id>-<slug:category>/<int:board_id>/comment',views.create_comment,name='create_comment'),
+    path('commentDelete/',views.comment_Delete,name='comment_Delete'),
     path('like/', views.b_like, name='b_like'),
 
 ]

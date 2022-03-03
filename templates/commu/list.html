@@ -68,6 +68,8 @@
         <button type="button" class="btn btn-primary my-3"
                 onclick='new_board({{ media_id }})'>새글 작성
         </button>
+        {# 현재로그인한 아이디 확인용   #}
+        <div id="now_login_id" style="display: none">{{ request.user }}</div>
 
         <table class="table table-hover">
             <thead class="thread-dark">
@@ -82,11 +84,11 @@
             <tbody>
             {% for list in posts %}
                 <tr>
-                    <td>{{ list.id }} </td>
+                    <td>{{ list.id }}  </td>
                     <td><a href="/commu/{{ list.media.id }}-{{ category }}/{{ list.id }}/detail/">{{ list.b_title }}</a></td>
                     <td>{{ list.b_author }}</td>
                     <td>{{ list.b_date }}</td>
-                    <td>{{ list.b_like }}</td>
+                    <td>{{ list.b_like.count }}</td>
                 </tr>
             {% endfor %}
 
