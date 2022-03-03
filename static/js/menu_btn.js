@@ -1,7 +1,8 @@
 function board_modify() {
+    let this_url = location.href.split('/')
+    let media_info = this_url[4]
     let queryString = $("#post_id").text()
-    let media_id = $("#media_id").text()
-    document.location.href = '/commu/' + media_id + '/' + queryString + '/modify/'
+    document.location.href = '/commu/' + media_info + '/' + queryString + '/modify/'
 }
 
 
@@ -9,9 +10,11 @@ function board_modify() {
 function board_delete() {
     let result = confirm('정말 삭제할까요?')
     if (result) {
+        let this_url = location.href.split('/')
+        let media_info = this_url[4]
         let queryString = $('#post_id').text()
-        let media_id = $("#media_id").text()
-        document.location.href = '/commu/' + media_id + '/' + queryString + '/delete/'
+
+        document.location.href = '/commu/' + media_info + '/' + queryString + '/delete/'
     }
 }
 

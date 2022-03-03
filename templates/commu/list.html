@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 {% block html_head %}
-    <title>{{ media_title }}</title>
+    <title>Movi commu board</title>
     <script src="/static/js/list.js"></script>
 
     <style>
@@ -83,7 +83,7 @@
             {% for list in posts %}
                 <tr>
                     <td>{{ list.id }} </td>
-                    <td><a href="/commu/{{ list.media.id }}/{{ list.id }}/detail/">{{ list.b_title }}</a></td>
+                    <td><a href="/commu/{{ list.media.id }}-{{ category }}/{{ list.id }}/detail/">{{ list.b_title }}</a></td>
                     <td>{{ list.b_author }}</td>
                     <td>{{ list.b_date }}</td>
                     <td>{{ list.b_like }}</td>

@@ -1,17 +1,16 @@
 import json
 
-from django.shortcuts import render, redirect, get_object_or_404
+from django.shortcuts import render, redirect, get_object_or_404, reverse
 from commu.models import Board, Comment, Media
 from commu.forms import BoardForm, BoardDetailForm
 from django.http import JsonResponse
 from django.http import HttpResponse
 
 
-def b_list(request, media_id):
-    media_title = request.GET['title']
-    category = request.GET['category']
+def b_list(request, media_id, category):
     if not Media.objects.filter(pk=media_id).exists():
         # media_id가  meda tabel에 없을때
+        media_title = request.GET['title']
         # 새로운 레코드 생성
         new_media = Media(id=media_id, title=media_title)
         new_media.save()
@@ -23,14 +22,13 @@ def b_list(request, media_id):
     context = {
         "posts": posts,
         "media_id": media_id,
-        "media_title": media_title,
         "category": category
     }
 
     return render(request, 'commu/list.html', context)
 
 
-def b_create(request, media_id):
+def b_create(request, media_id, category):
     if request.method == 'POST':
         title = request.POST['b_title']
         content = request.POST['b_content']
@@ -42,30 +40,32 @@ def b_create(request, media_id):
             media_id=media_id
         )
         board.save()
-        return redirect('commu:b_list', media_id)
+        return redirect('commu:b_list', media_id, category)
     else:
         boardForm = BoardForm()
         board = Board.objects.all()
         context = {
             'boardForm': boardForm,
-            'media_id': media_id
+            'media_id': media_id,
+            'category': category
         }
         return render(request, 'commu/create.html', context)
 
 
-def b_detail(request, board_id, media_id):
+def b_detail(request, board_id, media_id, category):
     post = get_object_or_404(Board, pk=board_id)
     board_detail_form = BoardDetailForm(instance=post)
     comments = post.comment_set.all().order_by('-id')
     context = {
         "detail_form": board_detail_form,
         'comments': comments,
-        'post': post
+        'post': post,
+        'category': category
     }
     return render(request, 'commu/detail.html', context)
 
 
-def b_modify(request, board_id, media_id):
+def b_modify(request, board_id, media_id, category):
     board = get_object_or_404(Board, pk=board_id)
     if request.method == 'POST':
         board.b_title = request.POST['b_title']
@@ -73,20 +73,21 @@ def b_modify(request, board_id, media_id):
 
         board.b_author = request.user
         board.save()
-        return redirect('commu:b_list', media_id)
+        return redirect('commu:b_list', media_id, category)
     else:
         boardForm = BoardForm(instance=board)
         context = {
             'boardForm': boardForm,
-            'board': board
+            'board': board,
+            'category': category
         }
         return render(request, 'commu/modify.html', context)
 
 
-def b_delete(request, board_id, media_id):
+def b_delete(request, board_id, media_id, category):
     board = get_object_or_404(Board, pk=board_id)
     board.delete()
-    return redirect('commu:b_list', media_id)
+    return redirect('commu:b_list', media_id, category)
 
 
 def create_comment(request):
