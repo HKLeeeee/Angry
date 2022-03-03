@@ -5,23 +5,43 @@
 {% block html_head %}
     <title>Movi Search</title>
     <style>
-        .poster-div {
-            width: 10%;
-            aspect-ratio: 2 / 3;
-        }
+        {#@media screen and (min-width: 1440px) {#}
+        {#    .poster-div {#}
+        {#        width: 126px;#}
+        {#       aspect-ratio: 2 / 3;#}
+        {#    }#}
+        {#}#}
+        {##}
+        {#@media screen and (min-width: 1024px) and (max-width: 1439px) {#}
+        {#    .poster-div {#}
+        {#        width: 250px;#}
+        {#        height: 375px;#}
+        {#    }#}
+        {#}#}
+        {##}
+        {#@media screen and (max-width: 1023px) {#}
+        {#    .poster-div {#}
+        {#        width: 200px;#}
+        {#        height: 300px;#}
+        {#    }#}
+        {#}#}
 
         .poster {
+            width: 126px;
+            aspect-ratio: 2/3;
+        }
+
+        .list-div {
             width: 100%;
         }
-        .overview-div {
-            width: 90%;
-        }
+
         .overview-box {
             width: 100%;
-            word-break:normal;
+            height: 72px;
+            word-break: normal;
             overflow: hidden;
             text-overflow: ellipsis;
-            white-space:normal;
+            white-space: normal;
         }
 
     </style>
@@ -33,7 +53,7 @@
     <div class="container">
         <div class="d-flex flex-column align-items-start justify-content-start my-3" id="result_container">
             <!-- list container -->
-            <div class="d-flex align-items-start align-items-center my-1 border">
+            <div class="d-flex align-items-start align-items-center my-1 border list-div">
                 <!-- poster -->
                 <div class="m-0 align-items-center poster-div">
                     <img class="align-self-center poster"

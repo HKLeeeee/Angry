@@ -41,7 +41,7 @@ $(function () {
                     }
                     let overview = search_result[i]["overview"]
 
-                    let list_container = $('<div></div>').addClass("d-flex align-items-start align-items-center my-1 px-1 border border-secondary rounded")
+                    let list_container = $('<div></div>').addClass("d-flex align-items-start align-items-center my-1 px-1 border border-secondary rounded list-div")
                     list_container.on('mouseenter', e => {
                         list_container.addClass("border-dark border-3")
                     })
@@ -99,7 +99,7 @@ $(function () {
                     }
                     let overview = search_result[i]["overview"]
 
-                    let list_container = $('<div></div>').addClass("d-flex align-items-start align-items-center my-1 px-1 border border-secondary rounded")
+                    let list_container = $('<div></div>').addClass("d-flex align-items-start align-items-center my-1 px-1 border border-secondary rounded list-div")
                     list_container.on('mouseenter', e => {
                         list_container.addClass("border-dark border-3")
                     })
