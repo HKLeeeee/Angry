@@ -12,5 +12,6 @@ urlpatterns = [
     path('set/', views.u_set, name='u_set'),
     path('nickChange/', views.nick_change, name='nick_change'),
     path('nickValid/', views.nick_valid, name='nick_valid'),
-    path('delete/', views.u_delete, name='u_delete')
+    path('delete/', views.u_delete, name='u_delete'),
+    path('deleteSuccess/', views.delete_success, name='delete_success'),
 ]

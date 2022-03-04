@@ -91,3 +91,15 @@ def u_delete(request):
         'delete_form': delete_form
     }
     return render(request, 'user/delete.html', context)
+
+
+def delete_success(request):
+    user = authenticate(username=request.user, password=request.POST['password'])
+
+    if user is not None:
+        user = Member.objects.filter(username=request.user)
+        user.delete()
+        django_logout(request)
+        return render(request, 'user/deleteSuccess.html')
+    else:
+        return HttpResponse(user)

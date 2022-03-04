@@ -9,10 +9,12 @@
     <br><br><br>
         <h1>회원탈퇴</h1>
         <br><br>
-    <form action="" method="post">
+    <form action="/user/deleteSuccess/" method="post">
         {% csrf_token %}
         {% bootstrap_form delete_form %}
-
+        <br>
+        <button type="submit" class="btn btn-danger">회원탈퇴</button>
+        <br><br>
     </form>
     </div>
 {% endblock %}
