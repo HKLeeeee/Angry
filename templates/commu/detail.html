@@ -70,7 +70,7 @@
             <button type="button" class="btn btn-info" onclick="make_comment()">Comment submit</button>
         {% endif %}
 
-        <table class="table table-hover my-5">
+        <table class="table my-5">
             <thead class="thread-dark">
             <tr>
                 <th scope="col">Comment_author</th>
@@ -84,6 +84,7 @@
                     <td>{{ comment.c_author }}</td>
                     <td>{{ comment.c_content }}</td>
                     <td>
+                        {# TODO 댓글 삭제 권한 #}
                          <button type="button" class="btn btn-secondary btn-sm"
                                 onclick="delete_comment({{ comment.id }})">Delete
                         </button>
