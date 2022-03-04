@@ -80,13 +80,13 @@
     </div>
 
     <div id="post_container" class="container my-3">
-    <div class="d-flex justify-content-between">
-        <span class="fs-2 align-self-start" style="font-weight: 600">Movi Board</span>
-        <button type="button" class="btn btn-dark my-3 align-self-end"
+        <div class="d-flex justify-content-between">
+            <span class="fs-2 align-self-start" style="font-weight: 600">Movi Board</span>
+            <button type="button" class="btn btn-dark my-3 align-self-end"
                     onclick='new_board({{ media_id }})'>새글 작성
             </button>
-    </div>
-    {# 현재로그인한 아이디 확인용   #}
+        </div>
+        {# 현재로그인한 아이디 확인용   #}
         <div id="now_login_id" style="display: none">{{ request.user }}</div>
 
 
@@ -112,7 +112,44 @@
             {% endfor %}
             </tbody>
         </table>
+             {#    paging start#}
+        <ul class="pagination justify-content-center">
+            {#        previous page#}
+            {% if board_list.has_previous %}
+                <li class="page-item">
+                    <a class="page-link" href="?page={{ board_list.previous_page_number }}">previous</a>
 
-
+                </li>
+            {% else %}
+                <li class="page-item disabled">
+                    <a class="page-link" tabindex="-1" aria-disabled="true" href="#">
+                        이전
+                    </a>
+                </li>
+            {% endif %}
+            {#    page list#}
+            {% for page_number in board_list.paginator.page_range %}
+                {% if page_number == board_list.number %}
+                    <li class="page-item active" aria-current="page">
+                        <a class="page-link" href="?page={{ page_number }}">{{ page_number }}</a>
+                    </li>
+                {% else %}
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{ page_number }}">{{ page_number }}</a>
+                    </li>
+                {% endif %}
+            {% endfor %}
+            {#    next page#}
+            {% if board_list.has_next %}
+                <li class="page-item">
+                    <a class="page-link" href="?page={{ board_list.next_page_number }}">next</a>
+                </li>
+            {% else %}
+                <li class="page-item disabled">
+                    <a class="page-link" tabindex="-1" aria-disabled="true" href="#">다음</a>
+                </li>
+            {% endif %}
+        </ul>
+        {#    paging end#}
     </div>
 {% endblock %}

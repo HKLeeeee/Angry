@@ -5,6 +5,7 @@ from commu.models import Board, Comment, Media
 from commu.forms import BoardForm, BoardDetailForm
 from django.http import JsonResponse
 from django.http import HttpResponse
+from django.core.paginator import Paginator
 
 
 def b_list(request, media_id, category):
@@ -141,3 +142,18 @@ def comment_delete(request):
     return JsonResponse({
         'c_id': c_id
     }, json_dumps_params={'ensure_ascii': True})
+
+
+def index(request):
+    page = request.GET.get('page', '1')  # page
+
+    # reference
+    board_list = Board.objects.order_by('-b_date')
+    # paging
+    paginator = Paginator(board_list, 5)
+    page_obj = paginator.get_page(page)
+
+    context = {
+        'board_list': page_obj
+    }
+    return render(request, 'commu/list.html', context)
