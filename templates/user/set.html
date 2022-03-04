@@ -19,7 +19,7 @@
         <h5>이름 &nbsp;&nbsp; &emsp; <small><small>{{ request.user.last_name }}{{ request.user.first_name }}</small></small></h5><br>
         <h5>이메일 &emsp; <small><small>{{ request.user.email }}</small></small></h5><br>
         <h5>아이디 &emsp; <small><small>{{ request.user.date_joined }}</small></small></h5><br>
-
-        <br><button type="button" class="btn btn-danger">회원 탈퇴</button> <br><br>
+        <br>
+        <a href="/user/delete/"><button type="button" class="btn btn-danger">회원 탈퇴</button> <br><br></a>
     </div>
 {% endblock %}

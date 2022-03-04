@@ -1,0 +1,18 @@
+{% extends 'base_without_search.html' %}
+{% load bootstrap4 %}
+
+{% block html_head %}
+{% endblock %}
+
+{% block html_body_without_search %}
+    <div class="container">
+    <br><br><br>
+        <h1>회원탈퇴</h1>
+        <br><br>
+    <form action="" method="post">
+        {% csrf_token %}
+        {% bootstrap_form delete_form %}
+
+    </form>
+    </div>
+{% endblock %}

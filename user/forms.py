@@ -145,3 +145,24 @@ class NicknameFail(forms.ModelForm):
                 }
             )
         }
+
+
+class DeleteForm(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['password'].help_text = ""
+
+    class Meta:
+        model = Member
+        fields = ['password']
+        labels = {
+            'password': "탈퇴하시려면 비밀번호를 입력하세요"
+        }
+        widgets = {
+            'password': forms.PasswordInput(
+                attrs={
+                    'class': 'form-control w-50',
+                    'placeholder': '비밀번호를 입력하세요'
+                }
+            )
+        }
