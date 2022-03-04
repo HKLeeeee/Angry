@@ -19,7 +19,7 @@
                 <div class="form-group">
                     <h1>상세 보기</h1>
                     글 번호 : <span id="post_id">{{ detail_form.initial.id }}</span><br>
-                    작성자 : <span>{{ post.b_author }}</span><br>
+                    작성자 : <span>{{ post.b_author.nickname }}</span><br>
                     <span id="media_id" style="display: none">{{ post.media.id }}</span>
                     <label for="title">제목</label>
                     <input type="text" class="form-control" id="title" value="{{ post.b_title }}" readonly>
@@ -61,7 +61,7 @@
         <h2>Comment</h2>
         <label for="c_name">Nick name</label>
         <br>
-        <input id="now_login_id" type="text" readonly="readonly" value="{{ request.user }}">
+        <input id="now_login_id" type="text" readonly="readonly" value="{{ request.user.nickname }}">
         <br>
         <label for="c_content">Content</label>
         <input type="text" class="form-control w-50" id="c_content">
@@ -81,7 +81,7 @@
             <tbody id="comment_container">
             {% for comment in comments %}
                 <tr id="comment_{{ comment.id }}">
-                    <td>{{ comment.c_author }}</td>
+                    <td>{{ comment.c_author.nickname }}</td>
                     <td>{{ comment.c_content }}</td>
                     <td>
                         {# TODO 댓글 삭제 권한 #}

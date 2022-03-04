@@ -21,7 +21,6 @@ function make_comment() {
     let this_url = location.href.split('/')
     let media_info = this_url[4]
     let queryString = $('#post_id').text()
-    //alert('/commu/' + media_info + '/' + queryString + '/comment')
     $.ajax({
         async: true,
         url: '/commu/' + media_info + '/' + queryString + '/comment',
@@ -35,7 +34,7 @@ function make_comment() {
         timeout: 3000,
         success: function (result) {
             let tr = $('<tr></tr>').attr('id', 'comment_'+result['c_id'])
-            let author_td = $('<td></td>').text(result['c_author'])
+            let author_td = $('<td></td>').text($('#now_login_id').val())
             tr.append(author_td)
 
             let content_td = $('<td></td>').text(result['c_content'])
