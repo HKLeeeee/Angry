@@ -7,7 +7,6 @@ from django.http import JsonResponse
 from django.http import HttpResponse
 from django.core.paginator import Paginator
 
-
 def b_list(request, media_id, category):
     if not Media.objects.filter(pk=media_id).exists():
         # media_id가  meda tabel에 없을때
@@ -19,11 +18,15 @@ def b_list(request, media_id, category):
     media = Media.objects.get(id=media_id)
     # media_id가 일치하는 post들을 다 가져옴
     posts = media.board_set.all().order_by('-id')
-
+    page = request.GET.get('page', '1')  # page
+    paginator = Paginator(posts, 3)
+    page_obj = paginator.get_page(page)
     context = {
-        "posts": posts,
+
         "media_id": media_id,
-        "category": category
+        "category": category,
+        "board_list": page_obj
+
     }
 
     return render(request, 'commu/list.html', context)
@@ -144,17 +147,3 @@ def comment_delete(request):
         'c_id': c_id
     }, json_dumps_params={'ensure_ascii': True})
 
-
-def index(request):
-    page = request.GET.get('page', '1')  # page
-
-    # reference
-    board_list = Board.objects.order_by('-b_date')
-    # paging
-    paginator = Paginator(board_list, 5)
-    page_obj = paginator.get_page(page)
-
-    context = {
-        'board_list': page_obj
-    }
-    return render(request, 'commu/list.html', context)

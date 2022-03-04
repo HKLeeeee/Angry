@@ -101,7 +101,8 @@
             </tr>
             </thead>
             <tbody>
-            {% for list in posts %}
+            {% if board_list %}
+            {% for list in board_list %}
                 <tr onclick='go_to_detail({{ media_id }}, "{{ category }}", {{ list.id }})'>
                     <td>{{ list.id }} </td>
                     <td>{{ list.b_title }}</td>
@@ -110,6 +111,7 @@
                     <td>{{ list.b_like.count }}</td>
                 </tr>
             {% endfor %}
+            {% endif %}
             </tbody>
         </table>
              {#    paging start#}
