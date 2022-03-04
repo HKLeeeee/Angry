@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from user.models import Member
-from user.forms import SignupForm, LoginForm, SettingForm, NicknameForm, NicknameFail
+from user.forms import SignupForm, LoginForm, SettingForm, NicknameForm, NicknameFail, DeleteForm
 from django.contrib.auth import login as django_login, logout as django_logout, authenticate
 from django.http import HttpResponse
 
@@ -83,3 +83,23 @@ def nick_valid(request):
             'nickname_form': nickname_form
         }
         return render(request, 'user/nickChange.html', context)
+
+
+def u_delete(request):
+    delete_form = DeleteForm()
+    context = {
+        'delete_form': delete_form
+    }
+    return render(request, 'user/delete.html', context)
+
+
+def delete_success(request):
+    user = authenticate(username=request.user, password=request.POST['password'])
+
+    if user is not None:
+        user = Member.objects.filter(username=request.user)
+        user.delete()
+        django_logout(request)
+        return render(request, 'user/deleteSuccess.html')
+    else:
+        return HttpResponse(user)
