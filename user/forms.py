@@ -86,3 +86,62 @@ class LoginForm(forms.ModelForm):
                 }
             )
         }
+
+
+class SettingForm(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['password'].help_text = ""
+
+    class Meta:
+        model = Member
+        fields = ['password']
+        labels = {
+            'password': '비밀번호 확인'
+        }
+        widgets = {
+            'password': forms.PasswordInput(
+                attrs={
+                    'class': 'form-control w-50',
+                    'placeholder': '비밀번호를 입력하세요'
+                }
+            )
+        }
+
+
+class NicknameForm(forms.ModelForm):
+    class Meta:
+        model = Member
+        fields = ['nickname']
+        labels = {
+            'nickname': ''
+        }
+        widgets = {
+            'nickname': forms.TextInput(
+                attrs={
+                    'class': 'form-control w-50',
+                    'placeholder': '변경할 닉네임을 입력하세요'
+                }
+            )
+        }
+
+
+class NicknameFail(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['nickname'].help_text = "중복되는 닉네임입니다"
+
+    class Meta:
+        model = Member
+        fields = ['nickname']
+        labels = {
+            'nickname': ''
+        }
+        widgets = {
+            'nickname': forms.TextInput(
+                attrs={
+                    'class': 'form-control w-50',
+                    'placeholder': '변경할 닉네임을 입력하세요'
+                }
+            )
+        }
