@@ -1,0 +1,25 @@
+{% extends 'base_without_search.html' %}
+{% load bootstrap4 %}
+
+{% block html_head %}
+    <script src="/static/js/user_btn.js"></script>
+{% endblock %}
+
+{% block html_body_without_search %}
+    <div class="container">
+        <br><br><br>
+        <h1>개인정보 수정</h1>
+        <br>
+        <br>
+        <h5>아이디 &emsp; <small><small>{{ request.user.username }}</small></small></h5><br>
+
+        <h5>닉네임 &emsp; <small><small>{{ request.user.nickname }} &nbsp;</small></small>
+            <a href="/user/nickChange/"><button type="button" class="btn btn-sm btn-info">닉네임 변경</button></a></h5><br>
+
+        <h5>이름 &nbsp;&nbsp; &emsp; <small><small>{{ request.user.last_name }}{{ request.user.first_name }}</small></small></h5><br>
+        <h5>이메일 &emsp; <small><small>{{ request.user.email }}</small></small></h5><br>
+        <h5>아이디 &emsp; <small><small>{{ request.user.date_joined }}</small></small></h5><br>
+
+        <br><button type="button" class="btn btn-danger">회원 탈퇴</button> <br><br>
+    </div>
+{% endblock %}

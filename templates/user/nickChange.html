@@ -1,0 +1,22 @@
+{% extends 'base_without_search.html' %}
+{% load bootstrap4 %}
+
+{% block html_head %}
+{% endblock %}
+
+{% block html_body_without_search %}
+    <div class="container">
+        <br><br>
+        <h5>현재 닉네임</h5>
+        <input type="text" readonly value="{{ request.user.nickname }}">
+        <br><br>
+        <h5>변경할 닉네임</h5>
+        <form action="/user/nickValid/" method="post">
+            {% csrf_token %}
+            {% bootstrap_form nickname_form %}
+            <br>
+            <button type="submit" class="btn btn-primary">변경</button>
+        </form>
+
+    </div>
+{% endblock %}
