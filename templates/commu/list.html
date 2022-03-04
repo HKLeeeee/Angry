@@ -52,6 +52,7 @@
         }
 
     </style>
+
 {% endblock %}
 
 {% block html_body %}
@@ -101,7 +102,7 @@
             </thead>
             <tbody>
             {% for list in posts %}
-                <tr onclick="document.location.href='/commu/{{ list.media.id }}-{{ category }}/{{ list.id }}/detail/'">
+                <tr onclick='go_to_detail({{ media_id }}, "{{ category }}", {{ list.id }})'>
                     <td>{{ list.id }} </td>
                     <td>{{ list.b_title }}</td>
                     <td>{{ list.b_author }}</td>
