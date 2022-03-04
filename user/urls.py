@@ -9,5 +9,7 @@ urlpatterns = [
     path('signupSuccess/', views.signup_success, name='signup_success'),
     path('loginProcess/', views.login_process, name='login_process'),
     path('logout/', views.u_logout, name='u_logout'),
-    path('setting/', views.u_setting, name='u_setting')
+    path('set/', views.u_set, name='u_set'),
+    path('nickChange/', views.nick_change, name='nick_change'),
+    path('nickValid/', views.nick_valid, name='nick_valid'),
 ]

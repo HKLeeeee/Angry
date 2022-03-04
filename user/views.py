@@ -1,6 +1,6 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from user.models import Member
-from user.forms import SignupForm, LoginForm
+from user.forms import SignupForm, LoginForm, SettingForm, NicknameForm, NicknameFail
 from django.contrib.auth import login as django_login, logout as django_logout, authenticate
 from django.http import HttpResponse
 
@@ -53,5 +53,33 @@ def u_logout(request):
     return redirect('home')
 
 
-def u_setting(request):
-    pass
+def u_set(request):
+    setting_form = SettingForm()
+    context = {
+        'setting_form': setting_form
+    }
+    return render(request, 'user/set.html', context)
+
+
+def nick_change(request):
+    nickname_form = NicknameForm()
+    context = {
+        'nickname_form': nickname_form
+    }
+    return render(request, 'user/nickChange.html', context)
+
+
+def nick_valid(request):
+    nick = Member.objects.filter(nickname=request.POST['nickname'])
+    cnt = nick.count()
+    if cnt == 0:
+        u = Member.objects.get(username=request.user)
+        u.nickname = request.POST['nickname']
+        u.save()
+        return redirect('user:u_set')
+    else:
+        nickname_form = NicknameFail()
+        context ={
+            'nickname_form': nickname_form
+        }
+        return render(request, 'user/nickChange.html', context)
