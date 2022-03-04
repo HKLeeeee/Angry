@@ -101,7 +101,8 @@ def create_comment(request, media_id, category, board_id):
 
     comment.save()
     return JsonResponse({
-        'c_id': comment.c_board_id,
+        'c_id': comment.id,
+        'c_board_id': comment.c_board_id,
         'c_author': str(request.user),
         'c_content': comment.c_content
     }, json_dumps_params={'ensure_ascii': True})

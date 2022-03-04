@@ -31,6 +31,7 @@ function go_to_detail(media_id, category, list_id){
 function hello(){
     alert('hello?')
 }
+
 $(function () {
     let TMDB_key = "be76d11dead7090637c1dd4cc5e4aa4c"
     let img_url = "https://image.tmdb.org/t/p/original"
