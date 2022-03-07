@@ -14,4 +14,6 @@ urlpatterns = [
     path('nickValid/', views.nick_valid, name='nick_valid'),
     path('delete/', views.u_delete, name='u_delete'),
     path('deleteSuccess/', views.delete_success, name='delete_success'),
+    path('aa/', views.aa, name='aa'),
+    path('kakaologin/', views.kakao_login, name='kakao_login'),
 ]
