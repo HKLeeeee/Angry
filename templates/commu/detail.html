@@ -8,91 +8,127 @@
         .container {
             font-family: 'Noto Serif KR', serif;
         }
+
+        label {
+            padding: 0.4em;
+            margin-bottom: 3px;
+            margin-top: 10px;
+        }
+
+        label.detail {
+            font-size: 1.2em;
+        }
+
+        label.comment {
+            font-size: 1em;
+        }
     </style>
 {% endblock %}
 
 {% block html_body %}
     <div class="container">
-
         <div class="row mt-5">
-            <div class="col-12">
-                <div class="form-group">
-                    <h1>상세 보기</h1>
-                    글 번호 : <span id="post_id">{{ detail_form.initial.id }}</span><br>
-                    작성자 : <span>{{ post.b_author.nickname }}</span><br>
+            <div class="d-flex flex-column align-items-center">
+                <div id="form-group" class="d-flex flex-column justify-content-center w-75">
+                    <h1 class="mb-5">상세 보기</h1>
+                    <div class="my-1">글 번호 : <span id="post_id">{{ detail_form.initial.id }}</span></div>
+                    <div class="my-1">작성자 : <span>{{ post.b_author.nickname }}</span></div>
                     <span id="media_id" style="display: none">{{ post.media.id }}</span>
-                    <label for="title">제목</label>
-                    <input type="text" class="form-control" id="title" value="{{ post.b_title }}" readonly>
-                    <label for="contents">내용</label>
+                    <br>
+                    <label for="title" class="detail">제목</label>
+                    <input type="text" class="form-control" id="title"
+                           value="{{ post.b_title }}" readonly>
+                    <label for="contents" class="detail">내용</label>
                     <textarea class="form-control" readonly>{{ post.b_content }}</textarea>
                     <br><br><br><br>
-
                 </div>
-                <button class="btn btn-primary"
-                        onclick="location.href='/commu/{{ post.media.id }}-{{ category }}/list'">리스트
-                </button>
 
-                {% if request.user == post.b_author %}
-                    <button class="btn btn-success" onclick="board_modify()">수정하기</button>
-                    <button class="btn btn-danger" onclick="board_delete()">삭제</button>
-                {% endif %}
-                {# 좋아요 버튼#}
-                <button id="{{ post.id }}" class="btn btn-warning" onclick="post_like(this.id)">
-                    {% if request.user in post.b_like.all %}
-                        <i id="heart" class="fas fa-heart"></i>
-                    {% else %}
-                        <i id="heart" class="far fa-heart"></i>
+                <div id="button_group" class="d-flex justify-content-end align-items-end w-75">
+                    {% if request.user == post.b_author %}
+                        <button class="btn btn-primary mx-1" onclick="board_modify()">수정</button>
+                        <button class="btn btn-warning mx-1" onclick="board_delete()">삭제</button>
                     {% endif %}
-                    <span id="like_count">{{ post.b_like.count }}</span>
-                </button>
 
+                    {# 좋아요 버튼#}
+                    <button id="{{ post.id }}" class="btn btn-danger mx-1" onclick="post_like(this.id)">
+                        {% if request.user in post.b_like.all %}
+                            <i id="heart" class="fas fa-heart"></i>
+                        {% else %}
+                            <i id="heart" class="far fa-heart"></i>
+                        {% endif %}
+                        <span id="like_count">{{ post.b_like.count }}</span>
+                    </button>
+                    {#    좋아요버튼 끝 #}
 
-                {#    좋아요버튼 끝 #}
-
+                    <button class="btn btn-dark mx-1"
+                            onclick="location.href='/commu/{{ post.media.id }}-{{ category }}/list'">리스트로
+                    </button>
+                </div>
             </div>
         </div>
-
     </div>
+
     <div class="container">
         <hr style="width: 100%; color: gray; margin-top:4em; margin-bottom: 4em;">
     </div>
+
     {#    댓글 시작 #}
     <div class="container">
-        <h2>Comment</h2>
-        <label for="c_name">Nick name</label>
-        <br>
-        <input id="now_login_id" type="text" readonly="readonly" value="{{ request.user.nickname }}">
-        <br>
-        <label for="c_content">Content</label>
-        <input type="text" class="form-control w-50" id="c_content">
-        <br>
-        {% if request.user.is_authenticated %}
-            <button type="button" class="btn btn-info" onclick="make_comment()">Comment submit</button>
-        {% endif %}
+        <div class="d-flex flex-column align-items-center">
+            <div class="w-75">
+                <h2>Comment</h2>
+                <div class="d-flex justify-content-between">
+                    <div class="d-inline-block" style="width: 20%">
+                        <label for="c_name" class="comment">Nick name</label>
+                        <input id="now_login_id" type="text" readonly="readonly" value="{{ request.user.nickname }}"
+                               class="form-control">
+                    </div>
+                    <div class="d-inline-block" style="width: 75%">
+                        <label for="c_content" class="comment">Content</label>
+                        <input type="text" class="form-control" id="c_content">
+                    </div>
+                </div>
+                <div class="d-flex flex-row-reverse">
+                    {% if request.user.is_authenticated %}
+                        <button type="button" class="btn btn-light border my-3" onclick="make_comment()">작성</button>
+                    {% endif %}
+                </div>
 
-        <table class="table my-5">
-            <thead class="thread-dark">
-            <tr>
-                <th scope="col">Comment_author</th>
-                <th scope="col">Comment_content</th>
-                <th scope="col"></th>
-            </tr>
-            </thead>
-            <tbody id="comment_container">
-            {% for comment in comments %}
-                <tr id="comment_{{ comment.id }}">
-                    <td>{{ comment.c_author.nickname }}</td>
-                    <td>{{ comment.c_content }}</td>
-                    <td>
-                        {# TODO 댓글 삭제 권한 #}
-                         <button type="button" class="btn btn-secondary btn-sm"
-                                onclick="delete_comment({{ comment.id }})">Delete
-                        </button>
-                    </td>
+
+            </div>
+
+            <table class="table my-5 w-75">
+                <colgroup>
+                    <col style="width: 20%;">
+                    <col style="width: 70%;">
+                    <col style="width: 10%;">
+                </colgroup>
+                <thead style="border-top : 0">
+                <tr>
+                    <th scope="col">Comment_author</th>
+                    <th scope="col">Comment_content</th>
+                    <th scope="col"></th>
                 </tr>
-            {% endfor %}
-            </tbody>
-        </table>
+                </thead>
+                <tbody id="comment_container">
+                {% for comment in comments %}
+                    <tr id="comment_{{ comment.id }}">
+                        <td>{{ comment.c_author.nickname }}</td>
+                        <td>{{ comment.c_content }}</td>
+                        <td>
+                            {% if request.user.nickname == comment.c_author.nickname %}
+                                <button type="button" class="btn btn-secondary btn-sm"
+                                        onclick="delete_comment({{ comment.id }})">Delete
+                                </button>
+                            {% endif %}
+
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
     </div>
 
     <script type="text/javascript">

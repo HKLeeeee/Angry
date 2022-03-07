@@ -83,12 +83,12 @@ class UserCreationForm(forms.ModelForm):
     password1 = forms.CharField(
         label=_("비밀번호"),
         strip=False,
-        widget=forms.PasswordInput(attrs={'autocomplete': 'new-password', 'class': 'form-control w-50', 'placeholder': '비밀번호를 입력하세요'}),
+        widget=forms.PasswordInput(attrs={'autocomplete': 'new-password', 'class': 'form-control w-100 my-1', 'placeholder': '비밀번호를 입력하세요'}),
         help_text="영문,숫자 혼합 8글자 이상. 아이디 이메일과 유사하지 않게 입력하세요"
     )
     password2 = forms.CharField(
         label=_("비밀번호 확인"),
-        widget=forms.PasswordInput(attrs={'autocomplete': 'new-password', 'class': 'form-control w-50', 'placeholder': '비밀번호를 다시 입력하세요'}),
+        widget=forms.PasswordInput(attrs={'autocomplete': 'new-password', 'class': 'form-control w-100 my-1', 'placeholder': '비밀번호를 다시 입력하세요'}),
         strip=False,
         help_text=_(""),
     )

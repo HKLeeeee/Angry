@@ -2,12 +2,19 @@
 {% load bootstrap4 %}
 
 {% block html_head %}
+    <style>
+    .container {
+            font-family: 'Noto Serif KR', serif;
+        }
+    </style>
 {% endblock %}
 
 {% block html_body_without_search %}
     <div class="container">
-    <br><br><br>
-        <h1>회원탈퇴</h1>
+        <div class="d-flex justify-content-center mt-5">
+            <div class="border w-75 d-flex flex-column justify-content-center"
+                 style="aspect-ratio: 3/1; padding:6em;">
+                <h1>회원탈퇴</h1>
         <br><br>
     <form action="/user/deleteSuccess/" method="post">
         {% csrf_token %}
@@ -16,5 +23,11 @@
         <button type="submit" class="btn btn-danger">회원탈퇴</button>
         <br><br>
     </form>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+    <br><br><br>
+
     </div>
 {% endblock %}

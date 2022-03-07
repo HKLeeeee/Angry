@@ -4,21 +4,29 @@
 {% block html_head %}
     <!--head tag에 들어갈 내용 -->
     <title>MOVI 회원가입</title>
+    <style>
+        .container {
+            font-family: 'Noto Serif KR', serif;
+        }
+    </style>
 {% endblock %}
 
 {% block html_body_without_search %}
     <!-- body tag에 들어갈 내용 -->
-    <div class="container">
-        <br>
-        <h1>회원가입</h1>
-        <br>
-        <form method="post" class="post-form" action="/user/signupSuccess/">
+    <div class="container d-flex justify-content-center">
+        <div class="d-flex flex-column justify-content-center w-75 mt-5 border"
+             style="padding-top : 5em; padding-left: 10em; padding-right: 10em">
+            <h1>회원가입</h1>
+            <form method="post" class="post-form w-100 my-3" action="/user/signupSuccess/">
             {% csrf_token %}
             {% bootstrap_form signup_form %}
             <br><br>
             <button class="w-25 btn btn-primary" type="submit">회원가입</button>
-        </form>
+            </form>
+            <br>
+        </div>
+        <br>
     </div>
-
+    <br><br>
 
 {% endblock %}

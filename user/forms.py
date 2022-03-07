@@ -22,37 +22,37 @@ class SignupForm(UserCreationForm):
         widgets = {
             'email': forms.EmailInput(
                 attrs={
-                    'class': 'form-control w-50',
+                    'class': 'form-control w-100 my-1',
                     'placeholder': '이메일을 입력하세요'
                 }
             ),
             'mobile': forms.TextInput(
                 attrs={
-                    'class': 'form-control w-50',
+                    'class': 'form-control w-100 my-1',
                     'placeholder': '전화번호를 입력하세요'
                 }
             ),
             'username': forms.TextInput(
                 attrs={
-                    'class': 'form-control w-50',
+                    'class': 'form-control w-100 my-1',
                     'placeholder': '아이디를 입력하세요'
                 }
             ),
             'last_name': forms.TextInput(
                 attrs={
-                    'class': 'form-control w-50',
+                    'class': 'form-control w-100 my-1',
                     'placeholder': '성을 입력하세요'
                 }
             ),
             'first_name': forms.TextInput(
                 attrs={
-                    'class': 'form-control w-50',
+                    'class': 'form-control w-100 my-1',
                     'placeholder': '이름을 입력하세요'
                 }
             ),
             'nickname': forms.TextInput(
                 attrs={
-                    'class': 'form-control w-50',
+                    'class': 'form-control w-100 my-1',
                     'placeholder': '닉네임을 입력하세요'
                 }
             )
@@ -75,13 +75,13 @@ class LoginForm(forms.ModelForm):
         widgets = {
             'username': forms.TextInput(
                 attrs={
-                    'class': 'form-control w-50',
+                    'class': 'form-control w-100',
                     'placeholder': '아이디를 입력하세요'
                 }
             ),
             'password': forms.PasswordInput(
                 attrs={
-                    'class': 'form-control w-50',
+                    'class': 'form-control w-100',
                     'placeholder': '비밀번호를 입력하세요'
                 }
             )
@@ -119,7 +119,7 @@ class NicknameForm(forms.ModelForm):
         widgets = {
             'nickname': forms.TextInput(
                 attrs={
-                    'class': 'form-control w-50',
+                    'class': 'form-control w-100',
                     'placeholder': '변경할 닉네임을 입력하세요'
                 }
             )
@@ -161,7 +161,7 @@ class DeleteForm(forms.ModelForm):
         widgets = {
             'password': forms.PasswordInput(
                 attrs={
-                    'class': 'form-control w-50',
+                    'class': 'form-control w-100 my-3',
                     'placeholder': '비밀번호를 입력하세요'
                 }
             )
