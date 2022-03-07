@@ -2,21 +2,29 @@
 {% load bootstrap4 %}
 
 {% block html_head %}
+    <style>
+        .container {
+            font-family: 'Noto Serif KR', serif;
+        }
+    </style>
 {% endblock %}
 
 {% block html_body_without_search %}
     <div class="container">
-        <br><br>
-        <h5>현재 닉네임</h5>
-        <input type="text" readonly value="{{ request.user.nickname }}">
-        <br><br>
-        <h5>변경할 닉네임</h5>
-        <form action="/user/nickValid/" method="post">
-            {% csrf_token %}
-            {% bootstrap_form nickname_form %}
-            <br>
-            <button type="submit" class="btn btn-primary">변경</button>
-        </form>
-
+        <div class="d-flex justify-content-center mt-5">
+            <div class="border w-50 d-flex flex-column justify-content-center"
+                 style="aspect-ratio: 1/1; padding: 7em;">
+                <h5>현재 닉네임</h5>
+                <input type="text" readonly value="{{ request.user.nickname }}" class="w-100 p-1">
+                <br><br>
+                <h5>변경할 닉네임</h5>
+                <form action="/user/nickValid/" method="post">
+                    {% csrf_token %}
+                    {% bootstrap_form nickname_form %}
+                    <br>
+                    <button type="submit" class="btn btn-primary">변경</button>
+                </form>
+            </div>
+        </div>
     </div>
 {% endblock %}

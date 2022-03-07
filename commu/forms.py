@@ -9,19 +9,19 @@ class BoardForm(ModelForm):
         fields = ['b_title', 'b_content']
 
         labels = {
-            'b_title': '글 제목',
-            'b_content': '글 내용'
+            'b_title': '제목',
+            'b_content': '내용'
         }
         widgets = {
             'b_title': forms.TextInput(
                 attrs={
-                    'class': 'form-control w-50',
+                    'class': 'form-control w-100 mb-3',
                     'placeholder': '제목을 써주세요'
                 }
             ),
             'b_content': forms.Textarea(
                 attrs={
-                    'class': 'form-control w-75',
+                    'class': 'form-control w-100 mb-3',
                     'placeholder': '내용을 써주세요'
                 }
             )
