@@ -166,3 +166,60 @@ class DeleteForm(forms.ModelForm):
                 }
             )
         }
+
+
+class SignupFormE(UserCreationForm):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['username'].help_text = ""
+        self.fields['email'].help_text = "중복된 이메일 입니다"
+
+    class Meta:
+        model = Member
+        fields = ['username', 'email', 'mobile', 'nickname', 'last_name', 'first_name']
+        labels = {
+            'username': '아이디',
+            'email': '이메일',
+            'mobile': '전화번호',
+            'nickname': '닉네임',
+            'last_name': '이름',
+            'first_name': ''
+        }
+        widgets = {
+            'email': forms.EmailInput(
+                attrs={
+                    'class': 'form-control w-50',
+                    'placeholder': '이메일을 입력하세요'
+                }
+            ),
+            'mobile': forms.TextInput(
+                attrs={
+                    'class': 'form-control w-50',
+                    'placeholder': '전화번호를 입력하세요'
+                }
+            ),
+            'username': forms.TextInput(
+                attrs={
+                    'class': 'form-control w-50',
+                    'placeholder': '아이디를 입력하세요'
+                }
+            ),
+            'last_name': forms.TextInput(
+                attrs={
+                    'class': 'form-control w-50',
+                    'placeholder': '성을 입력하세요'
+                }
+            ),
+            'first_name': forms.TextInput(
+                attrs={
+                    'class': 'form-control w-50',
+                    'placeholder': '이름을 입력하세요'
+                }
+            ),
+            'nickname': forms.TextInput(
+                attrs={
+                    'class': 'form-control w-50',
+                    'placeholder': '닉네임을 입력하세요'
+                }
+            )
+        }
