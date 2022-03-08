@@ -22,11 +22,9 @@ def b_list(request, media_id, category):
     paginator = Paginator(posts, 3)
     page_obj = paginator.get_page(page)
     context = {
-
         "media_id": media_id,
         "category": category,
         "board_list": page_obj
-
     }
 
     return render(request, 'commu/list.html', context)
