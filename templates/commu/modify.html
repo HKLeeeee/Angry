@@ -1,4 +1,4 @@
-{% extends 'base.html' %}
+{% extends 'base_without_search.html' %}
 {% load bootstrap4 %}
 {% block html_head %}
     <script src="/static/js/menu_btn.js"></script>
@@ -7,20 +7,36 @@
         .container {
             font-family: 'Noto Serif KR', serif;
         }
+
+        .page-title {
+            font-size: 3em;
+            font-weight: 600;
+            letter-spacing: 0.15em;
+        }
     </style>
 {% endblock %}
 
-{% block html_body %}
-     <div class="container">
-        <form method="post">
-            {% csrf_token %}
-            {% bootstrap_form boardForm %}
-            <button onclick="document.location.href='/commu/{{ board.media.id }}-{{ category }}/{{ board.id }}/modify/'"
-                    class="btn btn-success" type="submit" >수정</button>
-        </form>
-         <br>
-           <button class="btn btn-primary" onclick="document.location.href='/commu/{{ board.media.id }}-{{ category }}/list/'">리스트로</button>
+{% block html_body_without_search %}
+    <div class="container">
+        <div class="mx-auto">
+            <div class="d-flex flex-column align-items-center my-3">
+                <div class="my-5 page-title">게시물 수정</div>
+                <form method="post" class="w-75">
+                    {% csrf_token %}
+                    {% bootstrap_form boardForm %}
+                    <div class="d-flex flex-row-reverse">
+                    <button onclick="document.location.href='/commu/{{ board.media.id }}-{{ category }}/{{ board.id }}/modify/'"
+                            class="btn btn-outline-dark mx-1" type="submit">수정
+                    </button>
+                    <button class="btn btn-dark mx-1"
+                        onclick="document.location.href='/commu/{{ board.media.id }}-{{ category }}/list/'">리스트로
+                </button>
+                    </div>
+                </form>
+                <br>
 
+            </div>
+        </div>
     </div>
 
 {% endblock %}
